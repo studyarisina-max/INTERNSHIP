@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const API = axios.create({
  
-  baseURL: 'https://internship-8-prcd.onrender.com',
+  baseURL: 'https://internship-11-ju1d.onrender.com',
 });
 
 
