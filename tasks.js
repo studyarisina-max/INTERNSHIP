@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Task = require('./Task');
-const auth = require('../middleware/authmiddleware');
+const auth = require('./authmiddleware');
 
 
 router.get('/', auth, async(req, res) => {
