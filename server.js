@@ -18,8 +18,8 @@ mongoose.connect(MONGO_URI)
     .then(() => console.log('✅ MongoDB Connected Successfully'))
     .catch((err) => console.log('❌ MongoDB Connection Error:', err));
 
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/tasks', require('./routes/tasks')); 
+app.use('/api/auth', require('./auth'));
+app.use('/api/tasks', require('./tasks')); 
 
 
 const PORT = process.env.PORT || 5000;
