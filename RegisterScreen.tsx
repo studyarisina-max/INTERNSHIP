@@ -10,19 +10,23 @@ const RegisterScreen = ({ navigation }: any) => {
   const [loading, setLoading] = useState(false);
 
   const handleRegister = async () => {
+    // Basic validation
     if (!name || !email || !password) {
       return Alert.alert('Error', 'Please fill all fields');
     }
 
     setLoading(true);
     try {
+      // Connects to your Render Backend
       await API.post('/auth/register', { name, email, password });
+      
       setLoading(false);
-      Alert.alert('Success', 'Account created!');
+      Alert.alert('Success', 'Account created! Now please login.');
       navigation.navigate('Login');
     } catch (error: any) {
       setLoading(false);
-      const msg = error.response?.data?.message || "Connection Error";
+      // Grabs the error message from the server or shows a generic one
+      const msg = error.response?.data?.message || "Check your internet connection";
       Alert.alert('Registration Failed', msg);
     }
   };
@@ -30,11 +34,16 @@ const RegisterScreen = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Register</Text>
+      
       <CustomInput label="Name" value={name} onChangeText={setName} />
       <CustomInput label="Email" value={email} onChangeText={setEmail} />
       <CustomInput label="Password" value={password} onChangeText={setPassword} secureTextEntry />
-      
-      <TouchableOpacity style={styles.button} onPress={handleRegister} disabled={loading}>
+
+      <TouchableOpacity 
+        style={[styles.button, loading && { backgroundColor: '#ccc' }]} 
+        onPress={handleRegister}
+        disabled={loading}
+      >
         {loading ? <ActivityIndicator color="#fff" /> : <Text style={styles.buttonText}>Sign Up</Text>}
       </TouchableOpacity>
 
